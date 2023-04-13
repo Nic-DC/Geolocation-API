@@ -1,9 +1,10 @@
-import { Box } from "@mui/system";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import HomeIcon from "@mui/icons-material/Home";
-import { styled } from "@mui/material/styles";
+
+import { Autocomplete } from "@react-google-maps/api";
+
 import NavMode from "./NavMode";
 
 const Header = ({ setThemeMode }) => {
