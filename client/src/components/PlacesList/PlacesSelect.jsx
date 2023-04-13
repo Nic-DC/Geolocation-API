@@ -6,6 +6,10 @@ import Select from "@mui/material/Select";
 import { useState } from "react";
 import StarIcon from "@mui/icons-material/Star";
 import AddIcon from "@mui/icons-material/Add";
+import { useDispatch, useSelector } from "react-redux";
+
+// ACTIONS
+import { selectPlaceRatingAction, selectPlaceTypeAction } from "../../redux/actions/selectActions";
 //import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 
 const PlacesSelect = () => {
@@ -14,12 +18,19 @@ const PlacesSelect = () => {
   console.log("PLACE: ", place);
   console.log("RATING: ", rating);
 
+  const selectedPlace = useSelector((state) => state.select.placeType);
+  console.log({ selectedPlace });
+
+  const dispatch = useDispatch();
+
   const handlePlaceChange = (event) => {
     setPlace(event.target.value);
+    dispatch(selectPlaceTypeAction(event.target.value));
   };
 
   const handleRatingChange = (event) => {
     setRating(event.target.value);
+    dispatch(selectPlaceRatingAction(event.target.value));
   };
 
   return (
