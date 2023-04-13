@@ -3,7 +3,7 @@ import * as React from "react";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
-import MaterialUISwitch from "./styles";
+import { MaterialUISwitch } from "./styles";
 
 import { useTheme } from "@emotion/react";
 import { useState } from "react";
@@ -23,7 +23,7 @@ const NavMode = ({ setThemeMode }) => {
       <FormControlLabel
         control={
           <MaterialUISwitch
-            currentMode={theme.palette.mode}
+            currentmode={theme.palette.mode}
             sx={{ m: 1 }}
             checked={isChecked}
             onChange={handleThemeChange}

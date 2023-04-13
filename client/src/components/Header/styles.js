@@ -1,8 +1,12 @@
 import Switch from "@mui/material/Switch";
-import { styled } from "@mui/material/styles";
+import { styled, alpha } from "@mui/material/styles";
 import { orange } from "@mui/material/colors";
 
-const MaterialUISwitch = styled(Switch)(({ theme, currentMode }) => ({
+import InputBase from "@mui/material/InputBase";
+/* --------------------------------------------------
+                        SWITCH
+----------------------------------------------------*/
+export const MaterialUISwitch = styled(Switch)(({ theme, currentmode }) => ({
   width: 62,
   height: 34,
   padding: 7,
@@ -25,7 +29,7 @@ const MaterialUISwitch = styled(Switch)(({ theme, currentMode }) => ({
     },
   },
   "& .MuiSwitch-thumb": {
-    backgroundColor: currentMode === "dark" ? "#001e3c" : orange[500],
+    backgroundColor: currentmode === "dark" ? "#001e3c" : orange[500],
     width: 32,
     height: 32,
     "&:before": {
@@ -44,9 +48,50 @@ const MaterialUISwitch = styled(Switch)(({ theme, currentMode }) => ({
   },
   "& .MuiSwitch-track": {
     opacity: 1,
-    backgroundColor: currentMode === "dark" ? orange[500] : "#001e3c",
+    backgroundColor: currentmode === "dark" ? orange[500] : "#001e3c",
     borderRadius: 20 / 2,
   },
 }));
 
-export default MaterialUISwitch;
+/* --------------------------------------------------
+                        SEARCH
+----------------------------------------------------*/
+export const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(3),
+    width: "auto",
+  },
+}));
+
+export const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+export const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
+    },
+  },
+}));
