@@ -1,13 +1,6 @@
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import HomeIcon from "@mui/icons-material/Home";
+import PlacesCard from "./PlacesCard";
 
-const PlacesDetails = () => {
-  return (
-    <>
-      <h1>PlacesDetails</h1>
-    </>
-  );
+const PlacesDetails = ({ place }) => {
+  return <PlacesCard place={place} />;
 };
 export default PlacesDetails;

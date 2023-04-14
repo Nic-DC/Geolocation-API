@@ -15,7 +15,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
-import { Box, Chip, Icon, Link, Table, TableBody, TableCell, TableRow, Tooltip } from "@mui/material";
+import { Box, Chip, Link, Table, TableBody, TableCell, TableRow, Tooltip } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
@@ -25,7 +25,6 @@ import HttpIcon from "@mui/icons-material/Http";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import MarkEmailReadIcon from "@mui/icons-material/MarkEmailRead";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import StarsIcon from "@mui/icons-material/Stars";
@@ -62,7 +61,7 @@ const PlacesCard = ({ place }) => {
             </Avatar>
           ) : (
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              {/* {place.name.slice(0, 1)} */}D
+              D
             </Avatar>
           )
         }
@@ -108,8 +107,6 @@ const PlacesCard = ({ place }) => {
                 />
               </Tooltip>
             </Box>
-
-            {/* <MoreVertIcon /> */}
           </Box>
         }
       />
@@ -217,62 +214,6 @@ const PlacesCard = ({ place }) => {
           </TableBody>
         </Table>
       </CardContent>
-
-      {/* <CardContent>
-        {place?.phone && place.phone && <PhoneIphoneIcon>{place.phone}</PhoneIphoneIcon>}
-        {place?.phone && place.phone && <MarkEmailReadIcon>{place.email}</MarkEmailReadIcon>}
-        {place?.phone && place.phone && <AttachMoneyIcon>{place.price_level}</AttachMoneyIcon>}
-        {place?.phone && place.phone && <HttpIcon>{place.website}</HttpIcon>} */}
-      {/* <CardContent>
-        {place?.phone && (
-          <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-            <PhoneIphoneIcon
-              sx={{ mr: 1, fontSize: 25, cursor: "pointer" }}
-              onClick={() => window.open(`tel:${place.phone}`)}
-            />
-            <Typography
-              variant="subtitle2"
-              sx={{ fontSize: 14, cursor: "pointer" }}
-              onClick={() => window.open(`tel:${place.phone}`)}
-            >
-              {place.phone}
-            </Typography>
-          </Box>
-        )}
-        {place?.email && (
-          <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-            <MarkEmailReadIcon
-              sx={{ mr: 1, fontSize: 25, cursor: "pointer" }}
-              onClick={() => window.open(`mailto:${place.email}`)}
-            />
-            <Typography
-              variant="subtitle2"
-              sx={{ fontSize: 14, cursor: "pointer" }}
-              onClick={() => window.open(`mailto:${place.email}`)}
-            >
-              {place.email}
-            </Typography>
-          </Box>
-        )}
-        {place?.price_level && (
-          <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-            <AttachMoneyIcon sx={{ mr: 1, fontSize: 25 }}>{place.price_level}</AttachMoneyIcon>
-            <Typography variant="subtitle2" sx={{ fontSize: 14 }}>
-              {place.price_level}
-            </Typography>
-          </Box>
-        )}
-        {place?.website && (
-          <Link href={place.website} target="_blank" underline="none">
-            <Box sx={{ display: "flex", alignItems: "center", mb: 1, cursor: "pointer" }}>
-              <HttpIcon sx={{ mr: 1, fontSize: 25 }}>{place.website}</HttpIcon>
-              <Typography variant="subtitle2" sx={{ fontSize: 14 }}>
-                {place.name}
-              </Typography>
-            </Box>
-          </Link>
-        )}
-      </CardContent> */}
 
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">

@@ -3,6 +3,7 @@ import { configureStore, combineReducers, getDefaultMiddleware } from "@reduxjs/
 
 // SELECT [selects the PLACE'S TYPE & RATING]
 import selectReducer from "../reducers/selectReducer";
+import placesReducer from "../reducers/placesReducer";
 
 // REDUX-PERSIST
 import { persistReducer, persistStore } from "redux-persist";
@@ -15,6 +16,7 @@ const persistConfig = {
 
 const totalReducer = combineReducers({
   select: selectReducer,
+  places: placesReducer,
 });
 
 const peristedReducer = persistReducer(persistConfig, totalReducer);

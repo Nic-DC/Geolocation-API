@@ -14,8 +14,9 @@ import PlacesSelect from "./PlacesSelect";
 import { useSelector } from "react-redux";
 
 // MOCK DATA
-import places from "./testPlaces";
+// import places from "./testPlaces";
 import PlacesCard from "../PlacesDetails/PlacesCard";
+import PlacesDetails from "../PlacesDetails/PlacesDetails";
 
 const PlacesList = () => {
   const selectedPlace = useSelector((state) => state.select.select.placeType);
@@ -23,6 +24,9 @@ const PlacesList = () => {
 
   const selectedRating = useSelector((state) => state.select.select.placeRating);
   console.log({ selectedRating });
+
+  const places = useSelector((state) => state.places.places.placesList);
+  console.log({ places });
 
   return (
     <>
@@ -33,9 +37,9 @@ const PlacesList = () => {
         <PlacesSelect />
       </PlacesContainer>
       <PlacesContainer spacing={3}>
-        {places?.data.length > 0 &&
-          places.data.map((place) => {
-            return <PlacesCard place={place} />;
+        {places &&
+          places.map((place, i) => {
+            return <PlacesDetails place={place} key={i} />;
           })}
       </PlacesContainer>
     </>

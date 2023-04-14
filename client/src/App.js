@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // ROUTING
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -11,11 +11,19 @@ import { darkTheme, lightTheme } from "./stylesApp";
 import Header from "./components/Header/Header";
 import PlacesList from "./components/PlacesList/PlacesList";
 import Map from "./components/Map/Map";
+import { useDispatch } from "react-redux";
+import { getPlacesAction } from "./redux/actions/placesActions";
 
 const App = () => {
   // DARK/LIGHT theme
   const [themeMode, setThemeMode] = useState("dark");
   const theme = themeMode === "dark" ? darkTheme : lightTheme;
+
+  const dispatch = useDispatch();
+  // FETCHING THE PLACES ON MOUNT
+  useEffect(() => {
+    dispatch(getPlacesAction());
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>

@@ -3,7 +3,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { useState } from "react";
+
 import StarIcon from "@mui/icons-material/Star";
 import AddIcon from "@mui/icons-material/Add";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,12 +18,10 @@ const PlacesSelect = () => {
   const dispatch = useDispatch();
 
   const handlePlaceChange = (event) => {
-    //setPlace(event.target.value);
     dispatch(selectPlaceTypeAction(event.target.value));
   };
 
   const handleRatingChange = (event) => {
-    //setRating(event.target.value);
     dispatch(selectPlaceRatingAction(event.target.value));
   };
 
@@ -34,7 +32,6 @@ const PlacesSelect = () => {
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
-          // value={place}
           value={selectedPlace}
           onChange={handlePlaceChange}
         >
