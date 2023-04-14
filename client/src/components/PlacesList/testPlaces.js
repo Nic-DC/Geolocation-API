@@ -256,7 +256,7 @@ const places = {
       distance_string: "8.8 km",
       bearing: "south",
       rating: "5.0",
-      is_closed: false,
+      is_closed: true,
       open_now_text: "Closes in 20 min",
       is_long_closed: false,
       price_level: "$",

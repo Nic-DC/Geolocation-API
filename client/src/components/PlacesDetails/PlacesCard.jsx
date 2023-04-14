@@ -15,13 +15,22 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
-import { Box, Chip, Tooltip } from "@mui/material";
+import { Box, Chip, Icon, Link, Table, TableBody, TableCell, TableRow, Tooltip } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import ScheduleIcon from "@mui/icons-material/Schedule";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import LockIcon from "@mui/icons-material/Lock";
+import ClearIcon from "@mui/icons-material/Clear";
+import HttpIcon from "@mui/icons-material/Http";
+import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import MarkEmailReadIcon from "@mui/icons-material/MarkEmailRead";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import StarsIcon from "@mui/icons-material/Stars";
 import PlacesWorkingHours from "./PlacesWorkingHours";
+import { useTheme } from "@emotion/react";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -35,6 +44,8 @@ const ExpandMore = styled((props) => {
 }));
 
 const PlacesCard = ({ place }) => {
+  const theme = useTheme();
+  const isLightMode = theme.palette.mode === "light";
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -65,26 +76,39 @@ const PlacesCard = ({ place }) => {
           <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", py: 1 }}>
             <Tooltip title="ranking" arrow placement="right" sx={{ marginBottom: 1 }}>
               <Chip
-                color={place?.rating && place.rating === "5.0" ? "success" : "default"}
+                color={place?.rating && place.rating === "5.0" ? "default" : "default"}
                 icon={<StarsIcon />}
                 label={
                   place?.ranking
                     ? place.ranking.length > 35
-                      ? place.ranking.slice(0, 32) + "..."
+                      ? place.ranking.slice(0, 35) + "..."
                       : place.ranking
                     : "N/A"
                 }
               />
             </Tooltip>
-            <Tooltip title="cuisine" arrow placement="right">
-              <Chip
-                color={place?.cuisine && place?.cuisine[0]?.name ? "secondary" : "primary"}
-                deleteIcon={<CheckIcon />}
-                onDelete={() => console.log("clicked")}
-                icon={<AdminPanelSettingsIcon />}
-                label={place?.cuisine && place.cuisine[0]?.name ? place.cuisine[0].name : "Generic"}
-              />
-            </Tooltip>
+            <Box sx={{ display: "flex", alignItems: "flex-start", py: 1 }}>
+              <Tooltip title="cuisine" arrow placement="left-end" sx={{ marginRight: 1 }}>
+                <Chip
+                  color={place?.cuisine && place?.cuisine[0]?.name ? "secondary" : "primary"}
+                  deleteIcon={<CheckIcon />}
+                  onDelete={() => console.log("clicked")}
+                  icon={<AdminPanelSettingsIcon />}
+                  label={place?.cuisine && place.cuisine[0]?.name ? place.cuisine[0].name : "Generic"}
+                />
+              </Tooltip>
+
+              <Tooltip title="AVAILABILITY" arrow placement="right">
+                <Chip
+                  color={place?.is_closed && place.is_closed ? "error" : "success"}
+                  deleteIcon={place?.is_closed && place.is_closed ? <ClearIcon /> : <CheckIcon />}
+                  onDelete={() => console.log("clicked")}
+                  icon={place?.is_closed && place.is_closed ? <LockIcon /> : <LockOpenIcon />}
+                  label={place?.is_closed && place.is_closed ? "CLOSED" : "OPEN"}
+                />
+              </Tooltip>
+            </Box>
+
             {/* <MoreVertIcon /> */}
           </Box>
         }
@@ -100,8 +124,155 @@ const PlacesCard = ({ place }) => {
           alt="place"
         />
       )}
+      <CardContent>
+        <Table>
+          <TableBody>
+            <TableRow sx={{ backgroundColor: isLightMode ? "#ffff" : "rgba(0,0,0,0.4)" }}>
+              <TableCell sx={{ fontWeight: "bold", display: "flex" }}>
+                <PhoneIphoneIcon
+                  sx={{
+                    mr: 1,
+                    fontSize: 25,
+                    cursor: "pointer",
+                    color: isLightMode ? "rgba(0,0,0,0.6)" : "rgb(144, 202, 249)",
+                  }}
+                  onClick={() => window.open(`tel:${place.phone}`)}
+                />
+                {place?.phone && (
+                  <Typography
+                    variant="subtitle2"
+                    sx={{
+                      fontSize: 14,
+                      cursor: "pointer",
+                      color: isLightMode ? "rgba(0,0,0,0.6)" : "rgb(144, 202, 249)",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                    onClick={() => window.open(`tel:${place.phone}`)}
+                  >
+                    {place.phone}
+                  </Typography>
+                )}
+              </TableCell>
+              <TableCell sx={{ fontWeight: "bold", display: "flex" }}>
+                <MarkEmailReadIcon
+                  sx={{
+                    mr: 1,
+                    fontSize: 25,
+                    cursor: "pointer",
+                    color: isLightMode ? "rgba(0,0,0,0.6)" : "rgb(144, 202, 249)",
+                  }}
+                  onClick={() => window.open(`mailto:${place.email}`)}
+                />
+                {place?.email && (
+                  <Typography
+                    variant="subtitle2"
+                    sx={{
+                      fontSize: 14,
+                      cursor: "pointer",
+                      color: isLightMode ? "rgba(0,0,0,0.6)" : "rgb(144, 202, 249)",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                    onClick={() => window.open(`mailto:${place.email}`)}
+                  >
+                    {place.email}
+                  </Typography>
+                )}
+              </TableCell>
+              <TableCell sx={{ fontWeight: "bold", display: "flex", alignItems: "center" }}>
+                <Link
+                  href={place.website}
+                  target="_blank"
+                  underline="none"
+                  sx={{ display: "flex", alignItems: "center" }}
+                >
+                  <HttpIcon
+                    sx={{ mr: 1, fontSize: 30, color: isLightMode ? "rgba(0,0,0,0.6)" : "rgb(144, 202, 249)" }}
+                  />
+                  <Typography
+                    variant="subtitle2"
+                    sx={{ fontSize: 14, color: isLightMode ? "rgba(0,0,0,0.6)" : "rgb(144, 202, 249)" }}
+                  >
+                    Go to site
+                  </Typography>
+                </Link>
+              </TableCell>
+            </TableRow>
+            <TableRow sx={{ backgroundColor: isLightMode ? "#f5f5f5" : "rgba(0,0,0,0.4)" }}>
+              <TableCell sx={{ fontWeight: "bold", display: "flex", alignItems: "center" }}>
+                <AttachMoneyIcon
+                  sx={{ mr: 1, fontSize: 25, color: isLightMode ? "rgba(0,0,0,0.6)" : "rgb(144, 202, 249)" }}
+                />
+                {place?.price_level && (
+                  <Typography
+                    variant="subtitle2"
+                    sx={{ fontSize: 14, color: isLightMode ? "rgba(0,0,0,0.6)" : "rgb(144, 202, 249)" }}
+                  >
+                    {place.price_level}
+                  </Typography>
+                )}
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </CardContent>
 
-      <CardContent></CardContent>
+      {/* <CardContent>
+        {place?.phone && place.phone && <PhoneIphoneIcon>{place.phone}</PhoneIphoneIcon>}
+        {place?.phone && place.phone && <MarkEmailReadIcon>{place.email}</MarkEmailReadIcon>}
+        {place?.phone && place.phone && <AttachMoneyIcon>{place.price_level}</AttachMoneyIcon>}
+        {place?.phone && place.phone && <HttpIcon>{place.website}</HttpIcon>} */}
+      {/* <CardContent>
+        {place?.phone && (
+          <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+            <PhoneIphoneIcon
+              sx={{ mr: 1, fontSize: 25, cursor: "pointer" }}
+              onClick={() => window.open(`tel:${place.phone}`)}
+            />
+            <Typography
+              variant="subtitle2"
+              sx={{ fontSize: 14, cursor: "pointer" }}
+              onClick={() => window.open(`tel:${place.phone}`)}
+            >
+              {place.phone}
+            </Typography>
+          </Box>
+        )}
+        {place?.email && (
+          <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+            <MarkEmailReadIcon
+              sx={{ mr: 1, fontSize: 25, cursor: "pointer" }}
+              onClick={() => window.open(`mailto:${place.email}`)}
+            />
+            <Typography
+              variant="subtitle2"
+              sx={{ fontSize: 14, cursor: "pointer" }}
+              onClick={() => window.open(`mailto:${place.email}`)}
+            >
+              {place.email}
+            </Typography>
+          </Box>
+        )}
+        {place?.price_level && (
+          <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+            <AttachMoneyIcon sx={{ mr: 1, fontSize: 25 }}>{place.price_level}</AttachMoneyIcon>
+            <Typography variant="subtitle2" sx={{ fontSize: 14 }}>
+              {place.price_level}
+            </Typography>
+          </Box>
+        )}
+        {place?.website && (
+          <Link href={place.website} target="_blank" underline="none">
+            <Box sx={{ display: "flex", alignItems: "center", mb: 1, cursor: "pointer" }}>
+              <HttpIcon sx={{ mr: 1, fontSize: 25 }}>{place.website}</HttpIcon>
+              <Typography variant="subtitle2" sx={{ fontSize: 14 }}>
+                {place.name}
+              </Typography>
+            </Box>
+          </Link>
+        )}
+      </CardContent> */}
 
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
