@@ -13,23 +13,17 @@ import { selectPlaceRatingAction, selectPlaceTypeAction } from "../../redux/acti
 //import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 
 const PlacesSelect = () => {
-  const [place, setPlace] = useState(10);
-  const [rating, setRating] = useState(10);
-  console.log("PLACE: ", place);
-  console.log("RATING: ", rating);
-
-  const selectedPlace = useSelector((state) => state.select.placeType);
-  console.log({ selectedPlace });
-
+  const selectedPlace = useSelector((state) => state.select.select.placeType);
+  const selectedRating = useSelector((state) => state.select.select.placeRating);
   const dispatch = useDispatch();
 
   const handlePlaceChange = (event) => {
-    setPlace(event.target.value);
+    //setPlace(event.target.value);
     dispatch(selectPlaceTypeAction(event.target.value));
   };
 
   const handleRatingChange = (event) => {
-    setRating(event.target.value);
+    //setRating(event.target.value);
     dispatch(selectPlaceRatingAction(event.target.value));
   };
 
@@ -40,7 +34,8 @@ const PlacesSelect = () => {
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
-          value={place}
+          // value={place}
+          value={selectedPlace}
           onChange={handlePlaceChange}
         >
           <MenuItem value={10} sx={{ display: "flex", alignItems: "center" }}>
@@ -49,6 +44,18 @@ const PlacesSelect = () => {
           <MenuItem value={20}>Museums</MenuItem>
           <MenuItem value={30}>Parks</MenuItem>
           <MenuItem value={40}>Landmarks</MenuItem>
+          {/* <MenuItem value={10} selected={selectedPlace === 10} sx={{ display: "flex", alignItems: "center" }}>
+            <em>{selectedPlace === 10 ? "Restaurants" : "Restaurants (default)"}</em>
+          </MenuItem>
+          <MenuItem value={20} selected={selectedPlace === 20}>
+            Museums
+          </MenuItem>
+          <MenuItem value={30} selected={selectedPlace === 30}>
+            Parks
+          </MenuItem>
+          <MenuItem value={40} selected={selectedPlace === 40}>
+            Landmarks
+          </MenuItem> */}
         </Select>
       </FormControl>
       <FormControl variant="filled" sx={{ marginLeft: 2, minWidth: 140, height: 70 }}>
@@ -56,7 +63,7 @@ const PlacesSelect = () => {
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
-          value={rating}
+          value={selectedRating}
           onChange={handleRatingChange}
         >
           <MenuItem value={10}>

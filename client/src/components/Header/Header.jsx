@@ -6,7 +6,7 @@ import HomeIcon from "@mui/icons-material/Home";
 // GOOGLE AUTOCOMPLETE
 //import { Autocomplete } from "@react-google-maps/api";
 
-// COMPONENT
+// COMPONENTS
 import NavMode from "./NavMode";
 import SearchBar from "./SearchBar";
 

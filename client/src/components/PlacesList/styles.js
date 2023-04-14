@@ -3,8 +3,9 @@ import { styled } from "@mui/system";
 export const PlacesContainer = styled("div")({
   padding: "25px",
   display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
+  flexDirection: "column",
+  // justifyContent: "space-between",
+  alignItems: "flex-start",
 });
 
 export const PlacesSelectEmpty = styled("div")({

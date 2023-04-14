@@ -1,5 +1,5 @@
 export const SELECT_PLACE_TYPE = `SELECT_PLACE_TYPE`;
-export const SELECT_PLACE_RATING = `SELECT_RATING`;
+export const SELECT_PLACE_RATING = `SELECT_PLACE_RATING`;
 
 export const selectPlaceTypeAction = (selectedPlace) => {
   return {

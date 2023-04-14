@@ -1,5 +1,7 @@
 // COMBINE REDUCERS
 import { configureStore, combineReducers, getDefaultMiddleware } from "@reduxjs/toolkit";
+
+// SELECT [selects the PLACE'S TYPE & RATING]
 import selectReducer from "../reducers/selectReducer";
 
 // REDUX-PERSIST
