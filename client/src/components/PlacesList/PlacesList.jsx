@@ -32,12 +32,12 @@ const PlacesList = () => {
         </Typography>
         <PlacesSelect />
       </PlacesContainer>
-      <Grid container spacing={3}>
+      <PlacesContainer spacing={3}>
         {places?.data.length > 0 &&
           places.data.map((place) => {
             return <PlacesCard place={place} />;
           })}
-      </Grid>
+      </PlacesContainer>
     </>
   );
 };

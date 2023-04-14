@@ -15,6 +15,13 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
+import { Box, Chip, Tooltip } from "@mui/material";
+import CheckIcon from "@mui/icons-material/Check";
+import ScheduleIcon from "@mui/icons-material/Schedule";
+
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import StarsIcon from "@mui/icons-material/Stars";
+import PlacesWorkingHours from "./PlacesWorkingHours";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -35,7 +42,7 @@ const PlacesCard = ({ place }) => {
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ width: 400, marginBottom: 2 }}>
       <CardHeader
         avatar={
           place.photo?.images?.small?.url ? (
@@ -53,16 +60,49 @@ const PlacesCard = ({ place }) => {
             <MoreVertIcon />
           </IconButton>
         }
-        title={place.name}
-        subheader="September 14, 2016"
+        title={place?.name}
+        subheader={
+          <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", py: 1 }}>
+            <Tooltip title="ranking" arrow placement="right" sx={{ marginBottom: 1 }}>
+              <Chip
+                color={place?.rating && place.rating === "5.0" ? "success" : "default"}
+                icon={<StarsIcon />}
+                label={
+                  place?.ranking
+                    ? place.ranking.length > 35
+                      ? place.ranking.slice(0, 32) + "..."
+                      : place.ranking
+                    : "N/A"
+                }
+              />
+            </Tooltip>
+            <Tooltip title="cuisine" arrow placement="right">
+              <Chip
+                color={place?.cuisine && place?.cuisine[0]?.name ? "secondary" : "primary"}
+                deleteIcon={<CheckIcon />}
+                onDelete={() => console.log("clicked")}
+                icon={<AdminPanelSettingsIcon />}
+                label={place?.cuisine && place.cuisine[0]?.name ? place.cuisine[0].name : "Generic"}
+              />
+            </Tooltip>
+            {/* <MoreVertIcon /> */}
+          </Box>
+        }
       />
-      <CardMedia component="img" height="194" image="/static/images/cards/paella.jpg" alt="Paella dish" />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of
-          frozen peas along with the mussels, if you like.
-        </Typography>
-      </CardContent>
+
+      {place.photo?.images?.medium?.url ? (
+        <CardMedia component="img" height="194" image={place.photo?.images.medium.url} alt="place" />
+      ) : (
+        <CardMedia
+          component="img"
+          height="194"
+          image="https://media-cdn.tripadvisor.com/media/photo-s/0d/53/95/c9/getlstd-property-photo.jpg"
+          alt="place"
+        />
+      )}
+
+      <CardContent></CardContent>
+
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
@@ -71,23 +111,13 @@ const PlacesCard = ({ place }) => {
           <ShareIcon />
         </IconButton>
         <ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
-          <ExpandMoreIcon />
+          <ScheduleIcon /> <ExpandMoreIcon />
         </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10 minutes.
-          </Typography>
-
-          <Typography paragraph>
-            Add rice and stir very gently to distribute. Top with artichokes and peppers, and cook without stirring,
-            until most of the liquid is absorbed, 15 to 18 minutes. Reduce heat to medium-low, add reserved shrimp and
-            mussels, tucking them down into the rice, and cook again without stirring, until mussels have opened and
-            rice is just tender, 5 to 7 minutes more. (Discard any mussels that don&apos;t open.)
-          </Typography>
-          <Typography>Set aside off of the heat to let rest for 10 minutes, and then serve.</Typography>
+          <Typography variant="h4">Schedule</Typography>{" "}
+          {place.hours ? <PlacesWorkingHours place={place} /> : <h4>No hours</h4>}
         </CardContent>
       </Collapse>
     </Card>

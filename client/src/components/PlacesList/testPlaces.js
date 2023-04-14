@@ -409,7 +409,7 @@ const places = {
       distance: null,
       distance_string: null,
       bearing: "south",
-      rating: "5.0",
+      rating: "4.0",
       is_closed: false,
       is_long_closed: false,
       price_level: "",
