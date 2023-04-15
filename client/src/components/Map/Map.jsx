@@ -9,7 +9,11 @@ import Progress from "./Progress";
 // STYLING
 import { markerContainer, MapContainer, MapPaper, mapPointer } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
-import { getBoundsAction, getCoordinatesAction } from "../../redux/actions/coordsAndBoundsActions";
+import {
+  getBoundsAction,
+  getCoordinatesAction,
+  setChildClickedAction,
+} from "../../redux/actions/coordsAndBoundsActions";
 
 const Map = ({ coordinates, places }) => {
   const dispatch = useDispatch();
@@ -31,12 +35,11 @@ const Map = ({ coordinates, places }) => {
           // options={{ disableDefaultUI: true, zoomControl: true, styles: mapStyles }}
           onChange={(e) => {
             console.log(`EVENT: `, e);
-            // setCoordinates({ lat: e.center.lat, lng: e.center.lng });
-            // setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
+
             dispatch(getCoordinatesAction({ lat: e.center.lat, lng: e.center.lng }));
             dispatch(getBoundsAction({ ne: e.marginBounds.ne, sw: e.marginBounds.sw }));
           }}
-          // onChildClick={(child) => setChildClicked(child)}
+          onChildClick={(child) => dispatch(setChildClickedAction(child))}
         >
           {places &&
             places.map((place, i) => (
@@ -62,6 +65,7 @@ const Map = ({ coordinates, places }) => {
                       }
                       alt={place.name}
                     />
+                    <Rating size="small" value={Number(place.rating)} readOnly />
                   </MapPaper>
                 )}
               </div>

@@ -1,8 +1,5 @@
 import axios from "axios";
 
-// importing the actions used to set the coordinates and bounds
-import { getCoordinatesAction, getBoundsAction } from "./coordsAndBoundsActions.js";
-
 // exporting the variables used in the placesReducer
 export const PLACES_LIST_SAVE = `SAVE_PLACES`;
 export const PLACES_IS_LOADING = `PLACES_IS_LOADING`;

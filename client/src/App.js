@@ -39,7 +39,7 @@ const App = () => {
   // FETCHING THE PLACES WHEN THE coordinates / bounds change
   useEffect(() => {
     dispatch(getPlacesAction(bounds.sw, bounds.ne));
-  }, [coordinates, bounds]);
+  }, [bounds]);
 
   return (
     <ThemeProvider theme={theme}>
