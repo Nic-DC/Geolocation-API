@@ -2,10 +2,10 @@ import { GET_COORDINATES, GET_BOUNDS } from "../actions/coordsAndBoundsActions.j
 
 const initialState = {
   coordinates: {
-    coords: { lat: 0, lng: 0 },
+    coords: {},
   },
   bounds: {
-    bounds: null,
+    bounds: {},
   },
 };
 

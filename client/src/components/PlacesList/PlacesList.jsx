@@ -20,13 +20,13 @@ import PlacesDetails from "../PlacesDetails/PlacesDetails";
 
 const PlacesList = () => {
   const selectedPlace = useSelector((state) => state.select.select.placeType);
-  console.log({ selectedPlace });
+  // console.log({ selectedPlace });
 
   const selectedRating = useSelector((state) => state.select.select.placeRating);
-  console.log({ selectedRating });
+  // console.log({ selectedRating });
 
   const places = useSelector((state) => state.places.places.placesList);
-  console.log({ places });
+  // console.log({ places });
 
   return (
     <>

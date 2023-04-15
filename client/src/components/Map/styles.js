@@ -1,7 +1,7 @@
 import { styled } from "@mui/system";
 import { Paper } from "@mui/material";
 
-export const MarkerContainer = styled("div")({
+export const markerContainer = styled("div")({
   position: "absolute",
   transform: "translate(-50%, -50%)",
   zIndex: 1,
@@ -18,7 +18,7 @@ export const MapPaper = styled(Paper)({
   width: "100px",
 });
 
-export const MapPointer = styled("img")({
+export const mapPointer = styled("img")({
   cursor: "pointer",
 });
 export const MapContainer = styled("div")({

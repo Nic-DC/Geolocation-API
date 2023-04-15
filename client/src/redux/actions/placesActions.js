@@ -29,14 +29,14 @@ export const placesIsErrorAction = (bool) => {
   };
 };
 
-export const getPlacesAction = (placesFetched) => async (dispatch, getState) => {
+export const getPlacesAction = (sw, ne) => async (dispatch, getState) => {
   const URL = "https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary";
   const options = {
     params: {
-      bl_latitude: "11.847676",
-      tr_latitude: "12.838442",
-      bl_longitude: "109.095887",
-      tr_longitude: "109.149359",
+      bl_latitude: sw.lat,
+      tr_latitude: ne.lat,
+      bl_longitude: sw.lng,
+      tr_longitude: ne.lng,
     },
     headers: {
       "X-RapidAPI-Key": process.env.REACT_APP_TRAVEL_ADVISOR_API_KEY,
@@ -44,9 +44,6 @@ export const getPlacesAction = (placesFetched) => async (dispatch, getState) => 
     },
   };
   try {
-    console.log(`Fetching the places from the API...`);
-    console.log(`Current state is: ${getState()}`);
-
     dispatch(placesIsLoadingAction(true)); // indicate that data is being loaded
 
     const {

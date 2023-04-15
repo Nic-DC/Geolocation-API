@@ -7,16 +7,17 @@ import Rating from "@mui/material/Rating";
 import Progress from "./Progress";
 
 // STYLING
-import { MarkerContainer, MapContainer, MapPaper, MapPointer } from "./styles";
-import { useDispatch } from "react-redux";
+import { markerContainer, MapContainer, MapPaper, mapPointer } from "./styles";
+import { useDispatch, useSelector } from "react-redux";
 import { getBoundsAction, getCoordinatesAction } from "../../redux/actions/coordsAndBoundsActions";
 
-const Map = ({ coordinates, bounds }) => {
+const Map = ({ coordinates, places }) => {
   const dispatch = useDispatch();
-
+  console.log("places in the map component", places);
   const isMobile = useMediaQuery("(min-width:600px)");
 
   // const coordinates = { lat: 0, lng: 0 };
+
   return (
     <>
       <MapContainer>
@@ -36,7 +37,36 @@ const Map = ({ coordinates, bounds }) => {
             dispatch(getBoundsAction({ ne: e.marginBounds.ne, sw: e.marginBounds.sw }));
           }}
           // onChildClick={(child) => setChildClicked(child)}
-        ></GoogleMapReact>
+        >
+          {places &&
+            places.map((place, i) => (
+              <div
+                className={markerContainer}
+                lat={Number(place.latitude)}
+                lng={Number(place.longitude)}
+                $hover="false"
+                key={i}
+              >
+                {/* // <MarkerContainer key={i} lat={Number(place.latitude)} lng={Number(place.longitude)}> */}
+                {!isMobile ? (
+                  <LocationOnOutlinedIcon sx={{ color: "black" }} />
+                ) : (
+                  <MapPaper elevation={3}>
+                    <Typography>{place.name}</Typography>
+                    <img
+                      className={mapPointer}
+                      src={
+                        place.photo?.images?.small?.url
+                          ? place.photo.images.small.url
+                          : "https://media-cdn.tripadvisor.com/media/photo-s/0d/53/95/c9/getlstd-property-photo.jpg"
+                      }
+                      alt={place.name}
+                    />
+                  </MapPaper>
+                )}
+              </div>
+            ))}
+        </GoogleMapReact>
       </MapContainer>
     </>
   );
