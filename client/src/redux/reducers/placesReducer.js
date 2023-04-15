@@ -24,7 +24,8 @@ const placesReducer = (state = initialState, action) => {
         ...state,
         places: {
           ...state.places,
-          isLoading: !state.places.isLoading,
+          isLoading: action.payload,
+          // isLoading: !state.places.isLoading,
         },
       };
 
@@ -33,7 +34,8 @@ const placesReducer = (state = initialState, action) => {
         ...state,
         places: {
           ...state.places,
-          isError: !state.places.isError,
+          isError: action.payload,
+          // isError: !state.places.isError,
         },
       };
 

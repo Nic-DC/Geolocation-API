@@ -8,11 +8,15 @@ import Progress from "./Progress";
 
 // STYLING
 import { MarkerContainer, MapContainer, MapPaper, MapPointer } from "./styles";
+import { useDispatch } from "react-redux";
+import { getBoundsAction, getCoordinatesAction } from "../../redux/actions/coordsAndBoundsActions";
 
-const Map = () => {
+const Map = ({ coordinates, bounds }) => {
+  const dispatch = useDispatch();
+
   const isMobile = useMediaQuery("(min-width:600px)");
 
-  const coordinates = { lat: 0, lng: 0 };
+  // const coordinates = { lat: 0, lng: 0 };
   return (
     <>
       <MapContainer>
@@ -28,6 +32,8 @@ const Map = () => {
             console.log(`EVENT: `, e);
             // setCoordinates({ lat: e.center.lat, lng: e.center.lng });
             // setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
+            dispatch(getCoordinatesAction({ lat: e.center.lat, lng: e.center.lng }));
+            dispatch(getBoundsAction({ ne: e.marginBounds.ne, sw: e.marginBounds.sw }));
           }}
           // onChildClick={(child) => setChildClicked(child)}
         ></GoogleMapReact>

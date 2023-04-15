@@ -1,5 +1,9 @@
 import axios from "axios";
 
+// importing the actions used to set the coordinates and bounds
+import { getCoordinatesAction, getBoundsAction } from "./coordsAndBoundsActions.js";
+
+// exporting the variables used in the placesReducer
 export const PLACES_LIST_SAVE = `SAVE_PLACES`;
 export const PLACES_IS_LOADING = `PLACES_IS_LOADING`;
 export const PLACES_IS_ERROR = `PLACES_IS_ERROR`;
@@ -11,19 +15,17 @@ export const placesListSaveAction = (fetchedPlaces) => {
   };
 };
 
-export const placesIsLoadingAction = () => {
+export const placesIsLoadingAction = (bool) => {
   return {
     type: PLACES_IS_LOADING,
-    //payload: bool,
-    //payload: true,
+    payload: bool,
   };
 };
 
-export const placesIsErrorAction = () => {
+export const placesIsErrorAction = (bool) => {
   return {
     type: PLACES_IS_ERROR,
-    //payload: bool,
-    //payload: false,
+    payload: bool,
   };
 };
 
@@ -45,25 +47,23 @@ export const getPlacesAction = (placesFetched) => async (dispatch, getState) => 
     console.log(`Fetching the places from the API...`);
     console.log(`Current state is: ${getState()}`);
 
+    dispatch(placesIsLoadingAction(true)); // indicate that data is being loaded
+
     const {
       data: { data },
     } = await axios.get(URL, options);
 
     if (data) {
       dispatch(placesListSaveAction(data));
-
-      setTimeout(() => {
-        dispatch(placesIsLoadingAction());
-      }, 100);
-
-      // setTimeout(() => {
-      //   dispatch(placesIsErrorAction());
-      // }, 100);
+      dispatch(placesIsLoadingAction(false)); // indicate that data has been loaded
+    } else {
+      console.log(`Error with the response for fetching the places`);
+      dispatch(placesIsLoadingAction(false)); // indicate that data failed to load
+      dispatch(placesIsErrorAction(true)); // indicate that data failed to load
     }
-    // return data;
   } catch (error) {
-    console.error("Error GEtting the places from the API: ", error);
-    dispatch(placesIsLoadingAction());
-    dispatch(placesIsErrorAction());
+    console.error(`Error GEtting the places from the API: `, error);
+    dispatch(placesIsLoadingAction(false)); // indicate that data failed to load
+    dispatch(placesIsErrorAction(true)); // indicate that data failed to load
   }
 };

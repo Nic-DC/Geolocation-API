@@ -11,13 +11,17 @@ import { darkTheme, lightTheme } from "./stylesApp";
 import Header from "./components/Header/Header";
 import PlacesList from "./components/PlacesList/PlacesList";
 import Map from "./components/Map/Map";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getPlacesAction } from "./redux/actions/placesActions";
 
 const App = () => {
   // DARK/LIGHT theme
   const [themeMode, setThemeMode] = useState("dark");
   const theme = themeMode === "dark" ? darkTheme : lightTheme;
+
+  // Coordinates & Bounds [used in the Map component]
+  const coordinates = useSelector((state) => state.coordsAndBounds.coordinates.coords);
+  const bounds = useSelector((state) => state.coordsAndBounds.bounds.bounds);
 
   const dispatch = useDispatch();
   // FETCHING THE PLACES ON MOUNT
@@ -35,7 +39,7 @@ const App = () => {
             <PlacesList />
           </Grid>
           <Grid item xs={12} md={8}>
-            <Map />
+            <Map coordinates={coordinates} bounds={bounds} />
           </Grid>
         </Grid>
       </Router>
