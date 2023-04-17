@@ -9,14 +9,16 @@ import { PlacesContainer, PlacesFormControl, PlacesDivList, PlacesSelectEmpty, P
 
 // COMPONENT
 import PlacesSelect from "./PlacesSelect";
+import Progress from "./Progress";
+import PlacesCard from "../PlacesDetails/PlacesCard";
+import PlacesDetails from "../PlacesDetails/PlacesDetails";
 
 // HOOKS
 import { useSelector } from "react-redux";
+import { createRef, useEffect, useState } from "react";
 
 // MOCK DATA
 // import places from "./testPlaces";
-import PlacesCard from "../PlacesDetails/PlacesCard";
-import PlacesDetails from "../PlacesDetails/PlacesDetails";
 
 const PlacesList = () => {
   const selectedPlace = useSelector((state) => state.select.select.placeType);
@@ -28,18 +30,34 @@ const PlacesList = () => {
   const places = useSelector((state) => state.places.places.placesList);
   // console.log({ places });
 
+  const childClicked = useSelector((state) => state.coordsAndBounds.childClicked);
+
+  // we store the references of each place in the places array
+  const [elRefs, setElRefs] = useState([]);
+
+  // we make sure we have the progress while the places are loading
+  const isLoading = useSelector((state) => state.places.places.isLoading);
+
+  useEffect(() => {
+    const refs = Array(places.length)
+      .fill()
+      .map((_, i) => elRefs[i] || createRef());
+    setElRefs(refs);
+  }, [places]);
+
   return (
     <>
       <PlacesContainer>
         <Typography variant="h6" sx={{ marginBottom: 2 }}>
           Search the places you want:
         </Typography>
-        <PlacesSelect />
+
+        {isLoading ? <Progress /> : <PlacesSelect />}
       </PlacesContainer>
       <PlacesContainer spacing={3}>
         {places &&
           places.map((place, i) => {
-            return <PlacesDetails place={place} key={i} />;
+            return <PlacesDetails place={place} key={i} selected={Number(childClicked) === i} refProp={elRefs[i]} />;
           })}
       </PlacesContainer>
     </>

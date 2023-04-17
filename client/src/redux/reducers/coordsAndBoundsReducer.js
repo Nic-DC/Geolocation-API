@@ -7,7 +7,7 @@ const initialState = {
   bounds: {
     bounds: {},
   },
-  childClicked: null,
+  childClicked: "",
 };
 
 const coordsAndBoundsReducer = (state = initialState, action) => {

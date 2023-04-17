@@ -42,7 +42,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const PlacesCard = ({ place }) => {
+const PlacesCard = ({ place, selected, refProp }) => {
   const theme = useTheme();
   const isLightMode = theme.palette.mode === "light";
   const [expanded, setExpanded] = useState(false);
@@ -50,6 +50,9 @@ const PlacesCard = ({ place }) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  // we use the props to be able to scroll to a specific place when clicked
+  if (selected) refProp?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
 
   return (
     <Card sx={{ width: 400, marginBottom: 2 }}>

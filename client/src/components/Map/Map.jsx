@@ -3,9 +3,6 @@ import { Paper, Typography, useMediaQuery } from "@mui/material";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import Rating from "@mui/material/Rating";
 
-// COMPONENTS
-import Progress from "./Progress";
-
 // STYLING
 import { markerContainer, MapContainer, MapPaper, mapPointer } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
