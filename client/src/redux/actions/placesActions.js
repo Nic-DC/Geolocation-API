@@ -59,7 +59,10 @@ export const getPlacesAction = (selectedPlace, sw, ne) => async (dispatch, getSt
     if (data) {
       dispatch(placesFilteredListSaveAction([]));
       dispatch(selectPlaceRatingAction(2));
-      dispatch(placesListSaveAction(data));
+
+      const filteredData = data.filter((place) => place.name && place.num_reviews > 0);
+
+      dispatch(placesListSaveAction(filteredData));
       dispatch(placesIsLoadingAction(false)); // indicate that data has been loaded
     } else {
       console.log(`Error with the response for fetching the places`);

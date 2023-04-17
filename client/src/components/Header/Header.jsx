@@ -2,6 +2,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import HomeIcon from "@mui/icons-material/Home";
+import SearchIcon from "@mui/icons-material/Search";
 
 // GOOGLE AUTOCOMPLETE
 import { Autocomplete } from "@react-google-maps/api";
@@ -16,6 +17,10 @@ import { getCoordinatesAction } from "../../redux/actions/coordsAndBoundsActions
 
 // import SearchBar from "./SearchBar";
 
+// STYLING
+import { SearchIconWrapper, SearchBox } from "./styles.js";
+import { Input } from "@mui/material";
+
 const Header = ({ setThemeMode }) => {
   const dispatch = useDispatch();
 
@@ -24,9 +29,11 @@ const Header = ({ setThemeMode }) => {
   const onLoad = (autoComplete) => setAutocomplete(autoComplete);
 
   const onPlaceChanged = () => {
-    const lat = autocomplete.getPlace().geometry.location.lat();
-    const lng = autocomplete.getPlace().geometry.location.lng();
-    dispatch(getCoordinatesAction({ lat: lat, lng: lng }));
+    if (autocomplete !== null && autocomplete.getPlace() !== null) {
+      const lat = autocomplete.getPlace().geometry.location.lat();
+      const lng = autocomplete.getPlace().geometry.location.lng();
+      dispatch(getCoordinatesAction({ lat: lat, lng: lng }));
+    }
   };
   return (
     <>
@@ -37,7 +44,14 @@ const Header = ({ setThemeMode }) => {
           </IconButton>
 
           <NavMode setThemeMode={setThemeMode} />
-          <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}></Autocomplete>
+          <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+            <SearchBox>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <Input placeholder="Search…" />
+            </SearchBox>
+          </Autocomplete>
           {/* <SearchBar /> */}
         </Toolbar>
       </AppBar>

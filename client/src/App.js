@@ -45,8 +45,10 @@ const App = () => {
 
   // FETCHING THE PLACES WHEN THE coordinates / bounds change
   useEffect(() => {
-    dispatch(getPlacesAction(selectedPlace, bounds.sw, bounds.ne));
-  }, [bounds, selectedPlace]);
+    if (bounds) {
+      dispatch(getPlacesAction(selectedPlace, bounds.sw, bounds.ne));
+    }
+  }, [coordinates, bounds, selectedPlace]);
 
   // FILTERS THE PLACES based on rating
   useEffect(() => {
