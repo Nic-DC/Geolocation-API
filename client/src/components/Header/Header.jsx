@@ -4,13 +4,30 @@ import IconButton from "@mui/material/IconButton";
 import HomeIcon from "@mui/icons-material/Home";
 
 // GOOGLE AUTOCOMPLETE
-//import { Autocomplete } from "@react-google-maps/api";
+import { Autocomplete } from "@react-google-maps/api";
+
+// HOOKS
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 // COMPONENTS
 import NavMode from "./NavMode";
-import SearchBar from "./SearchBar";
+import { getCoordinatesAction } from "../../redux/actions/coordsAndBoundsActions";
+
+// import SearchBar from "./SearchBar";
 
 const Header = ({ setThemeMode }) => {
+  const dispatch = useDispatch();
+
+  // Google Autocomplete
+  const [autocomplete, setAutocomplete] = useState(null);
+  const onLoad = (autoComplete) => setAutocomplete(autoComplete);
+
+  const onPlaceChanged = () => {
+    const lat = autocomplete.getPlace().geometry.location.lat();
+    const lng = autocomplete.getPlace().geometry.location.lng();
+    dispatch(getCoordinatesAction({ lat: lat, lng: lng }));
+  };
   return (
     <>
       <AppBar position="static" color="primary" sx={{ py: 1 }}>
@@ -20,8 +37,8 @@ const Header = ({ setThemeMode }) => {
           </IconButton>
 
           <NavMode setThemeMode={setThemeMode} />
-
-          <SearchBar />
+          <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}></Autocomplete>
+          {/* <SearchBar /> */}
         </Toolbar>
       </AppBar>
     </>

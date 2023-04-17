@@ -28,7 +28,7 @@ const PlacesList = () => {
   // console.log({ selectedRating });
 
   const places = useSelector((state) => state.places.places.placesList);
-  const filteredPlaces = useSelector((state) => state.places.places.placesList);
+  const filteredPlaces = useSelector((state) => state.places.places.filteredPlacesList);
 
   const placesToMap = filteredPlaces.length > 0 ? filteredPlaces : places;
   console.log({ placesToMap });
