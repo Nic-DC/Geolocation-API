@@ -1,7 +1,9 @@
 import axios from "axios";
+import { selectPlaceRatingAction } from "./selectActions";
 
 // exporting the variables used in the placesReducer
 export const PLACES_LIST_SAVE = `SAVE_PLACES`;
+export const PLACES_FILTERED_LIST_SAVE = `PLACES_FILTERED_LIST_SAVE`;
 export const PLACES_IS_LOADING = `PLACES_IS_LOADING`;
 export const PLACES_IS_ERROR = `PLACES_IS_ERROR`;
 
@@ -9,6 +11,13 @@ export const placesListSaveAction = (fetchedPlaces) => {
   return {
     type: PLACES_LIST_SAVE,
     payload: fetchedPlaces,
+  };
+};
+
+export const placesFilteredListSaveAction = (filteredPlaces) => {
+  return {
+    type: PLACES_FILTERED_LIST_SAVE,
+    payload: filteredPlaces,
   };
 };
 
@@ -26,8 +35,8 @@ export const placesIsErrorAction = (bool) => {
   };
 };
 
-export const getPlacesAction = (sw, ne) => async (dispatch, getState) => {
-  const URL = "https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary";
+export const getPlacesAction = (selectedPlace, sw, ne) => async (dispatch, getState) => {
+  const URL = `https://travel-advisor.p.rapidapi.com/${selectedPlace}/list-in-boundary`;
   const options = {
     params: {
       bl_latitude: sw.lat,
@@ -48,6 +57,8 @@ export const getPlacesAction = (sw, ne) => async (dispatch, getState) => {
     } = await axios.get(URL, options);
 
     if (data) {
+      dispatch(placesFilteredListSaveAction([]));
+      dispatch(selectPlaceRatingAction(2));
       dispatch(placesListSaveAction(data));
       dispatch(placesIsLoadingAction(false)); // indicate that data has been loaded
     } else {

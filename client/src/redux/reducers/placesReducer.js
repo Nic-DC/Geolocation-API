@@ -1,8 +1,14 @@
-import { PLACES_LIST_SAVE, PLACES_IS_LOADING, PLACES_IS_ERROR } from "../actions/placesActions";
+import {
+  PLACES_LIST_SAVE,
+  PLACES_FILTERED_LIST_SAVE,
+  PLACES_IS_LOADING,
+  PLACES_IS_ERROR,
+} from "../actions/placesActions";
 
 const initialState = {
   places: {
     placesList: [],
+    filteredPlacesList: [],
     isLoading: true,
     isError: false,
   },
@@ -16,6 +22,15 @@ const placesReducer = (state = initialState, action) => {
         places: {
           ...state.places,
           placesList: action.payload,
+        },
+      };
+
+    case PLACES_FILTERED_LIST_SAVE:
+      return {
+        ...state,
+        places: {
+          ...state.places,
+          filteredPlacesList: action.payload,
         },
       };
 

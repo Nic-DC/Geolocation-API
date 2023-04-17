@@ -12,7 +12,7 @@ import Header from "./components/Header/Header";
 import PlacesList from "./components/PlacesList/PlacesList";
 import Map from "./components/Map/Map";
 import { useDispatch, useSelector } from "react-redux";
-import { getPlacesAction } from "./redux/actions/placesActions";
+import { getPlacesAction, placesFilteredListSaveAction } from "./redux/actions/placesActions";
 import { getCoordinatesAction } from "./redux/actions/coordsAndBoundsActions";
 
 const App = () => {
@@ -25,9 +25,16 @@ const App = () => {
   // The fetched places
   const places = useSelector((state) => state.places.places.placesList);
 
+  // Filtered places
+  const filteredPlaces = useSelector((state) => state.places.places.filteredPlacesList);
+
   // Coordinates & Bounds [used in the Map component]
   const coordinates = useSelector((state) => state.coordsAndBounds.coordinates.coords);
   const bounds = useSelector((state) => state.coordsAndBounds.bounds.bounds);
+
+  // Filter the places based on "type" and "rating"
+  const selectedPlace = useSelector((state) => state.select.select.placeType);
+  const selectedRating = useSelector((state) => state.select.select.placeRating);
 
   // GETTING THE USER'S CURRENT LOCATION ON MOUNT
   useEffect(() => {
@@ -38,9 +45,15 @@ const App = () => {
 
   // FETCHING THE PLACES WHEN THE coordinates / bounds change
   useEffect(() => {
-    dispatch(getPlacesAction(bounds.sw, bounds.ne));
-  }, [bounds]);
+    dispatch(getPlacesAction(selectedPlace, bounds.sw, bounds.ne));
+  }, [bounds, selectedPlace]);
 
+  // FILTERS THE PLACES based on rating
+  useEffect(() => {
+    const filteredPlaces = places.filter((place) => Number(place.rating) >= selectedRating);
+    console.log({ filteredPlaces });
+    dispatch(placesFilteredListSaveAction(filteredPlaces));
+  }, [selectedRating]);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -51,7 +64,7 @@ const App = () => {
             <PlacesList />
           </Grid>
           <Grid item xs={12} md={8}>
-            <Map coordinates={coordinates} bounds={bounds} places={places} />
+            <Map coordinates={coordinates} bounds={bounds} places={filteredPlaces.length ? filteredPlaces : places} />
           </Grid>
         </Grid>
       </Router>

@@ -28,7 +28,10 @@ const PlacesList = () => {
   // console.log({ selectedRating });
 
   const places = useSelector((state) => state.places.places.placesList);
-  // console.log({ places });
+  const filteredPlaces = useSelector((state) => state.places.places.placesList);
+
+  const placesToMap = filteredPlaces.length > 0 ? filteredPlaces : places;
+  console.log({ placesToMap });
 
   const childClicked = useSelector((state) => state.coordsAndBounds.childClicked);
 
@@ -43,7 +46,7 @@ const PlacesList = () => {
       .fill()
       .map((_, i) => elRefs[i] || createRef());
     setElRefs(refs);
-  }, [places]);
+  }, [places, filteredPlaces]);
 
   return (
     <>
@@ -55,8 +58,8 @@ const PlacesList = () => {
         {isLoading ? <Progress /> : <PlacesSelect />}
       </PlacesContainer>
       <PlacesContainer spacing={3}>
-        {places &&
-          places.map((place, i) => {
+        {placesToMap &&
+          placesToMap.map((place, i) => {
             return <PlacesDetails place={place} key={i} selected={Number(childClicked) === i} refProp={elRefs[i]} />;
           })}
       </PlacesContainer>

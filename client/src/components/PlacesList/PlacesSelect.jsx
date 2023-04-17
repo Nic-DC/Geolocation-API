@@ -35,12 +35,12 @@ const PlacesSelect = () => {
           value={selectedPlace}
           onChange={handlePlaceChange}
         >
-          <MenuItem value={10} sx={{ display: "flex", alignItems: "center" }}>
+          <MenuItem value="restaurants" sx={{ display: "flex", alignItems: "center" }}>
             <em>Restaurants</em>
           </MenuItem>
-          <MenuItem value={20}>Museums</MenuItem>
-          <MenuItem value={30}>Parks</MenuItem>
-          <MenuItem value={40}>Landmarks</MenuItem>
+          <MenuItem value="hotels">Hotels</MenuItem>
+          <MenuItem value="attractions">Attractions</MenuItem>
+
           {/* <MenuItem value={10} selected={selectedPlace === 10} sx={{ display: "flex", alignItems: "center" }}>
             <em>{selectedPlace === 10 ? "Restaurants" : "Restaurants (default)"}</em>
           </MenuItem>
@@ -63,23 +63,23 @@ const PlacesSelect = () => {
           value={selectedRating}
           onChange={handleRatingChange}
         >
-          <MenuItem value={10}>
+          <MenuItem value={2}>
             <em>All</em>
           </MenuItem>
-          <MenuItem value={20}>
+          <MenuItem value={3}>
             <StarIcon sx={{ fontSize: "1.25rem" }} />
             <StarIcon sx={{ fontSize: "1.25rem" }} />
             <StarIcon sx={{ fontSize: "1.25rem" }} />
             <AddIcon sx={{ fontSize: "1.25rem", fontWeight: "bold", color: "darkorange" }} />
           </MenuItem>
-          <MenuItem value={30}>
+          <MenuItem value={4}>
             <StarIcon sx={{ fontSize: "1.25rem" }} />
             <StarIcon sx={{ fontSize: "1.25rem" }} />
             <StarIcon sx={{ fontSize: "1.25rem" }} />
             <StarIcon sx={{ fontSize: "1.25rem" }} />
             <AddIcon sx={{ fontSize: "1.25rem", fontWeight: "bold", color: "darkorange" }} />
           </MenuItem>
-          <MenuItem value={40}>
+          <MenuItem value={5}>
             <StarIcon sx={{ fontSize: "1.25rem" }} />
             <StarIcon sx={{ fontSize: "1.25rem" }} />
             <StarIcon sx={{ fontSize: "1.25rem" }} />

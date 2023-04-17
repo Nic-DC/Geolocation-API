@@ -2,8 +2,8 @@ import { SELECT_PLACE_TYPE, SELECT_PLACE_RATING } from "../actions/selectActions
 
 const initialState = {
   select: {
-    placeType: 10,
-    placeRating: 10,
+    placeType: "restaurants",
+    placeRating: 2,
   },
 };
 
