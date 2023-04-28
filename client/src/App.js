@@ -48,7 +48,7 @@ const App = () => {
     if (bounds) {
       dispatch(getPlacesAction(selectedPlace, bounds.sw, bounds.ne));
     }
-  }, [coordinates, bounds, selectedPlace]);
+  }, [bounds, selectedPlace]);
 
   // FILTERS THE PLACES based on rating
   useEffect(() => {
