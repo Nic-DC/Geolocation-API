@@ -7,6 +7,8 @@ import HomeIcon from "@mui/icons-material/Home";
 import NavMode from "./NavMode";
 
 import SearchBar from "./SearchBar";
+import FavoritesBadge from "./FavoritesBadge";
+import AccountAvatar from "./AccountAvatar";
 
 const Header = ({ setThemeMode }) => {
   return (
@@ -20,6 +22,8 @@ const Header = ({ setThemeMode }) => {
           <NavMode setThemeMode={setThemeMode} />
 
           <SearchBar />
+          <FavoritesBadge />
+          <AccountAvatar />
         </Toolbar>
       </AppBar>
     </>

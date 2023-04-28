@@ -1,10 +1,13 @@
 import Switch from "@mui/material/Switch";
 import { styled, alpha } from "@mui/material/styles";
+import Badge from "@mui/material/Badge";
+import Avatar from "@mui/material/Avatar";
+
 import { orange } from "@mui/material/colors";
 
 import InputBase from "@mui/material/InputBase";
 /* --------------------------------------------------
-                        SWITCH
+                      NavMode.jsx - SWITCH
 ----------------------------------------------------*/
 export const MaterialUISwitch = styled(Switch)(({ theme, currentmode }) => ({
   width: 62,
@@ -53,9 +56,6 @@ export const MaterialUISwitch = styled(Switch)(({ theme, currentmode }) => ({
   },
 }));
 
-/* --------------------------------------------------
-                        SEARCH
-----------------------------------------------------*/
 export const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -71,16 +71,6 @@ export const Search = styled("div")(({ theme }) => ({
     width: "auto",
   },
 }));
-
-// export const SearchIconWrapper = styled("div")(({ theme }) => ({
-//   padding: theme.spacing(0, 2),
-//   height: "100%",
-//   position: "absolute",
-//   pointerEvents: "none",
-//   display: "flex",
-//   alignItems: "center",
-//   justifyContent: "center",
-// }));
 
 export const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -134,4 +124,42 @@ export const SearchBox = styled("div")(({ theme }) => ({
     marginLeft: theme.spacing(3),
     width: "auto",
   },
+}));
+
+/* --------------------------------------------------
+                  AccountAvatar.jsx
+----------------------------------------------------*/
+export const StyledBadge = styled(Badge)(({ theme }) => ({
+  "& .MuiBadge-badge": {
+    backgroundColor: "#44b700",
+    color: "#44b700",
+    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    "&::after": {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      borderRadius: "50%",
+      animation: "ripple 1.2s infinite ease-in-out",
+      border: "1px solid currentColor",
+      content: '""',
+    },
+  },
+  "@keyframes ripple": {
+    "0%": {
+      transform: "scale(.8)",
+      opacity: 1,
+    },
+    "100%": {
+      transform: "scale(2.4)",
+      opacity: 0,
+    },
+  },
+}));
+
+export const SmallAvatar = styled(Avatar)(({ theme }) => ({
+  width: 22,
+  height: 22,
+  border: `2px solid ${theme.palette.background.paper}`,
 }));
