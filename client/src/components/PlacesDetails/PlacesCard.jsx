@@ -25,6 +25,7 @@ import HttpIcon from "@mui/icons-material/Http";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import MarkEmailReadIcon from "@mui/icons-material/MarkEmailRead";
+import FileDownloadIcon from "@mui/icons-material/FileDownload";
 
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import StarsIcon from "@mui/icons-material/Stars";
@@ -219,15 +220,27 @@ const PlacesCard = ({ place, selected, refProp }) => {
       </CardContent>
 
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
-          <ScheduleIcon /> <ExpandMoreIcon />
-        </ExpandMore>
+        <Tooltip title="add to favorites" arrow placement="bottom">
+          <IconButton aria-label="add to favorites">
+            <FavoriteIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="share" arrow placement="bottom">
+          <IconButton aria-label="share">
+            <ShareIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="download as pdf" arrow placement="bottom">
+          <IconButton aria-label="download as .pdf">
+            <FileDownloadIcon />
+          </IconButton>
+        </Tooltip>
+
+        <Tooltip title="shedule" arrow placement="top">
+          <ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
+            <ScheduleIcon /> <ExpandMoreIcon />
+          </ExpandMore>
+        </Tooltip>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>

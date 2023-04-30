@@ -27,7 +27,7 @@ const AccountAvatar = () => {
       <Tooltip title="Settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
           <StyledBadge overlap="circular" anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot">
-            <Avatar alt="Remy Sharp" src="../../assets/user.png" />
+            <Avatar alt="Remy Sharp" src="/user.png" />
           </StyledBadge>
         </IconButton>
       </Tooltip>
@@ -54,11 +54,6 @@ const AccountAvatar = () => {
         ))}
       </Menu>
     </Box>
-    // <Stack direction="row" spacing={10}>
-    //   <StyledBadge overlap="circular" anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant="dot">
-    //     <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-    //   </StyledBadge>
-    // </Stack>
   );
 };
 export default AccountAvatar;
