@@ -3,6 +3,8 @@ import {
   PLACES_FILTERED_LIST_SAVE,
   PLACES_IS_LOADING,
   PLACES_IS_ERROR,
+  FAVORITE_PLACES_COUNT,
+  FAVORITE_PLACES_LIST,
 } from "../actions/placesActions";
 
 const initialState = {
@@ -11,6 +13,10 @@ const initialState = {
     filteredPlacesList: [],
     isLoading: true,
     isError: false,
+  },
+  favorites: {
+    favoritePlacesCount: 0,
+    favoritePlacesList: [],
   },
 };
 
@@ -53,6 +59,15 @@ const placesReducer = (state = initialState, action) => {
           // isError: !state.places.isError,
         },
       };
+
+    // case FAVORITE_PLACES_COUNT:
+    //   return {
+    //     ...state,
+    //     favorites: {
+    //       ...state.favorites,
+    //       favoritePlacesCount: favoritePlacesCount
+    //     }
+    //   }
 
     default:
       return state;

@@ -6,6 +6,8 @@ export const PLACES_LIST_SAVE = `SAVE_PLACES`;
 export const PLACES_FILTERED_LIST_SAVE = `PLACES_FILTERED_LIST_SAVE`;
 export const PLACES_IS_LOADING = `PLACES_IS_LOADING`;
 export const PLACES_IS_ERROR = `PLACES_IS_ERROR`;
+export const FAVORITE_PLACES_COUNT = `FAVORITE_PLACES_COUNT`;
+export const FAVORITE_PLACES_LIST = `FAVORITE_PLACES_LIST`;
 
 export const placesListSaveAction = (fetchedPlaces) => {
   return {

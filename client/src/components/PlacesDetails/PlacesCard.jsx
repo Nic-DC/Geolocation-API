@@ -31,6 +31,7 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import StarsIcon from "@mui/icons-material/Stars";
 import PlacesWorkingHours from "./PlacesWorkingHours";
 import { useTheme } from "@emotion/react";
+import { useSelector } from "react-redux";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -44,8 +45,17 @@ const ExpandMore = styled((props) => {
 }));
 
 const PlacesCard = ({ place, selected, refProp }) => {
+  // FAVORITE
+  // const favoritePlacesCount = useSelector(store => store.places.favorites.favoritePlacesCount)
+  // const [favoriteCount, setFavoriteCount] = useState(favoritePlacesCount)
+
+  // THEME
   const theme = useTheme();
+
+  // LIGHT/DARK MODE
   const isLightMode = theme.palette.mode === "light";
+
+  // EXPAND
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -220,6 +230,7 @@ const PlacesCard = ({ place, selected, refProp }) => {
       </CardContent>
 
       <CardActions disableSpacing>
+        {/* REDUX: placesActions.js && placesReducer.js => favorites */}
         <Tooltip title="add to favorites" arrow placement="bottom">
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
