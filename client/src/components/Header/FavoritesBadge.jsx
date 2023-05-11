@@ -32,13 +32,5 @@ const FavoritesBadge = () => {
     </Tooltip>
   );
 };
-// const FavoritesBadge = () => {
-//   return (
-//     <Stack spacing={4} direction="row" sx={{ color: "action.active" }}>
-//       <Badge color="secondary" badgeContent={1000} max={999}>
-//         <FavoriteIcon />
-//       </Badge>
-//     </Stack>
-//   );
-// };
+
 export default FavoritesBadge;

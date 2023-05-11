@@ -14,7 +14,7 @@ import {
 
 const Map = ({ coordinates, places }) => {
   const dispatch = useDispatch();
-  console.log("places in the map component", places);
+  console.log("places in the map component: ", places);
   const isMobile = useMediaQuery("(min-width:600px)");
 
   // const coordinates = { lat: 0, lng: 0 };
