@@ -5,6 +5,7 @@ import {
   PLACES_IS_ERROR,
   FAVORITE_PLACES_COUNT,
   FAVORITE_PLACES_LIST,
+  TOGGLE_FAVORITE_PLACE,
 } from "../actions/placesActions";
 
 const initialState = {
@@ -15,8 +16,8 @@ const initialState = {
     isError: false,
   },
   favorites: {
-    favoritePlacesCount: 0,
     favoritePlacesList: [],
+    favoritePlacesCount: 0,
   },
 };
 
@@ -60,14 +61,42 @@ const placesReducer = (state = initialState, action) => {
         },
       };
 
-    // case FAVORITE_PLACES_COUNT:
-    //   return {
-    //     ...state,
-    //     favorites: {
-    //       ...state.favorites,
-    //       favoritePlacesCount: favoritePlacesCount
-    //     }
-    //   }
+    case TOGGLE_FAVORITE_PLACE:
+      const place = action.payload;
+      const isFavorite = state.favorites.favoritePlacesList.some(
+        (favPlace) => favPlace.location_id === place.location_id
+      );
+
+      if (isFavorite) {
+        const updatedFavoritePlacesList = state.favorites.favoritePlacesList.filter(
+          (favPlace) => favPlace.location_id !== place.location_id
+        );
+
+        console.log("isFavorite does EXIST - updatedFavoritePlacesList:", updatedFavoritePlacesList);
+        console.log("isFavorite does EXIST - updatedFavoritePlacesCount:", updatedFavoritePlacesList.length);
+        return {
+          ...state,
+          favorites: {
+            ...state.favorites,
+            favoritePlacesList: updatedFavoritePlacesList,
+            favoritePlacesCount: updatedFavoritePlacesList.length,
+          },
+        };
+      } else {
+        const updatedFavoritePlacesList = [...state.favorites.favoritePlacesList, place];
+
+        console.log("isFavorite does NOT EXIST - updatedFavoritePlacesList:", updatedFavoritePlacesList);
+        console.log("isFavorite does NOT EXIST - updatedFavoritePlacesCount:", updatedFavoritePlacesList.length);
+
+        return {
+          ...state,
+          favorites: {
+            ...state.favorites,
+            favoritePlacesList: updatedFavoritePlacesList,
+            favoritePlacesCount: updatedFavoritePlacesList.length,
+          },
+        };
+      }
 
     default:
       return state;

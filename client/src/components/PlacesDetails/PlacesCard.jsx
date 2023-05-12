@@ -31,7 +31,8 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import StarsIcon from "@mui/icons-material/Stars";
 import PlacesWorkingHours from "./PlacesWorkingHours";
 import { useTheme } from "@emotion/react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleFavoritePlacesAction } from "../../redux/actions/placesActions";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -46,8 +47,22 @@ const ExpandMore = styled((props) => {
 
 const PlacesCard = ({ place, selected, refProp }) => {
   // FAVORITE
-  // const favoritePlacesCount = useSelector(store => store.places.favorites.favoritePlacesCount)
-  // const [favoriteCount, setFavoriteCount] = useState(favoritePlacesCount)
+  const dispatch = useDispatch();
+  const favoritePlaces = useSelector((state) => state.places.favorites.favoritePlacesList);
+
+  // const handleFavoritePlaces = () => {
+  //   dispatch(toggleFavoritePlacesAction(place));
+  // };
+
+  //const isFavorite = favoritePlaces.includes(place.location_id);
+  // console.log("PlacesCard - favoritePlaces:", favoritePlaces);
+  // console.log("PlacesCard - isFavorite:", isFavorite);
+
+  const [isFavorite, setIsFavorite] = useState(favoritePlaces.includes(place.location_id));
+  const handleFavoritePlaces = () => {
+    dispatch(toggleFavoritePlacesAction(place));
+    setIsFavorite(!isFavorite);
+  };
 
   // THEME
   const theme = useTheme();
@@ -232,10 +247,15 @@ const PlacesCard = ({ place, selected, refProp }) => {
       <CardActions disableSpacing>
         {/* REDUX: placesActions.js && placesReducer.js => favorites */}
         <Tooltip title="add to favorites" arrow placement="bottom">
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
+          <IconButton
+            aria-label="add to favorites"
+            onClick={handleFavoritePlaces}
+            className={isFavorite ? "favorite-icon active" : "favorite-icon"}
+          >
+            <FavoriteIcon color={isFavorite ? "primary" : "warning"} />
           </IconButton>
         </Tooltip>
+
         <Tooltip title="share" arrow placement="bottom">
           <IconButton aria-label="share">
             <ShareIcon />

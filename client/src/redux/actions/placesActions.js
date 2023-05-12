@@ -8,6 +8,7 @@ export const PLACES_IS_LOADING = `PLACES_IS_LOADING`;
 export const PLACES_IS_ERROR = `PLACES_IS_ERROR`;
 export const FAVORITE_PLACES_COUNT = `FAVORITE_PLACES_COUNT`;
 export const FAVORITE_PLACES_LIST = `FAVORITE_PLACES_LIST`;
+export const TOGGLE_FAVORITE_PLACE = `TOGGLE_FAVORITE`;
 
 export const placesListSaveAction = (fetchedPlaces) => {
   return {
@@ -34,6 +35,14 @@ export const placesIsErrorAction = (bool) => {
   return {
     type: PLACES_IS_ERROR,
     payload: bool,
+  };
+};
+
+// FAVORITES
+export const toggleFavoritePlacesAction = (place) => {
+  return {
+    type: TOGGLE_FAVORITE_PLACE,
+    payload: place,
   };
 };
 
