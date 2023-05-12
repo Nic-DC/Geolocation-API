@@ -34,6 +34,9 @@ import { useTheme } from "@emotion/react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavoritePlacesAction } from "../../redux/actions/placesActions";
 
+// styles.js
+import { StyledIconButton } from "./styles.js";
+
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -247,13 +250,9 @@ const PlacesCard = ({ place, selected, refProp }) => {
       <CardActions disableSpacing>
         {/* REDUX: placesActions.js && placesReducer.js => favorites */}
         <Tooltip title="add to favorites" arrow placement="bottom">
-          <IconButton
-            aria-label="add to favorites"
-            onClick={handleFavoritePlaces}
-            className={isFavorite ? "favorite-icon active" : "favorite-icon"}
-          >
-            <FavoriteIcon color={isFavorite ? "primary" : "warning"} />
-          </IconButton>
+          <StyledIconButton aria-label="add to favorites" onClick={handleFavoritePlaces} isFavorite={isFavorite}>
+            <FavoriteIcon />
+          </StyledIconButton>
         </Tooltip>
 
         <Tooltip title="share" arrow placement="bottom">
