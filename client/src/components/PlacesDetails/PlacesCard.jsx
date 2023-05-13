@@ -53,14 +53,6 @@ const PlacesCard = ({ place, selected, refProp }) => {
   const dispatch = useDispatch();
   const favoritePlaces = useSelector((state) => state.places.favorites.favoritePlacesList);
 
-  // const handleFavoritePlaces = () => {
-  //   dispatch(toggleFavoritePlacesAction(place));
-  // };
-
-  //const isFavorite = favoritePlaces.includes(place.location_id);
-  // console.log("PlacesCard - favoritePlaces:", favoritePlaces);
-  // console.log("PlacesCard - isFavorite:", isFavorite);
-
   const [isFavorite, setIsFavorite] = useState(favoritePlaces.includes(place.location_id));
   const handleFavoritePlaces = () => {
     dispatch(toggleFavoritePlacesAction(place));
