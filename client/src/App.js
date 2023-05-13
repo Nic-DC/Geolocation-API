@@ -37,18 +37,18 @@ const App = () => {
   const selectedRating = useSelector((state) => state.select.select.placeRating);
 
   // GETTING THE USER'S CURRENT LOCATION ON MOUNT
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
-      dispatch(getCoordinatesAction({ lat: latitude, lng: longitude }));
-    });
-  }, []);
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
+  //     dispatch(getCoordinatesAction({ lat: latitude, lng: longitude }));
+  //   });
+  // }, []);
 
   //FETCHING THE PLACES WHEN THE coordinates / bounds change
-  useEffect(() => {
-    if (bounds) {
-      dispatch(getPlacesAction(selectedPlace, bounds.sw, bounds.ne));
-    }
-  }, [bounds, selectedPlace]);
+  // useEffect(() => {
+  //   if (bounds) {
+  //     dispatch(getPlacesAction(selectedPlace, bounds.sw, bounds.ne));
+  //   }
+  // }, [bounds, selectedPlace]);
 
   // FILTERS THE PLACES based on rating
   // useEffect(() => {
